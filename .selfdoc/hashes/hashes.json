@@ -1,0 +1,18 @@
+{
+  "cli-index.md": {
+    "content": "69f5747807e4863ca9a48c1175979788ed9e6af2d8ebd4d58480cc1b6f219559",
+    "description": "23768b19e6f8d1953cb0c03a5d1573b32b8910613bcfb9ad0eb62642afc3c006"
+  },
+  "cli-summarize.md": {
+    "content": "6aa8361c38f589df6e7a418a243eb53bed7d379905b0507e9a896d529c863cf1",
+    "description": "f8f1a9ede53d8d49c65c39ee87a608c6bf0167256be7b86004056711db483473"
+  },
+  "gen-index.md": {
+    "content": "77b26abe69da3a05549e49ce64a424607918ca7cfb8913353870f1d7ae523870",
+    "description": "bb3cd9d34f014c0674a9285c25ee14b5b4abc5cf941f0d83594c301405e8f3b6"
+  },
+  "guide.md": {
+    "content": "ef67f03d6a8ca1d47b22bb25907b681fc2a2f109a8d781c3bbee2980685147b0",
+    "description": "a17277251e191ce034e5ac4e686754d293f4ba930a18de2ef2c8fa9980369789"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "name": "reposummary",
+  "slug": "reposummary",
+  "version": "0.1.2",
+  "description": "Generate a Markdown journal of a git repository's activity over any time window, with optional LLM narration.",
+  "language": "go",
+  "base_url": "https://github.com/smm-h/reposummary",
+  "pages": [
+    {
+      "path": "cli-index.md",
+      "title": "reposummary CLI Reference",
+      "type": "doc"
+    },
+    {
+      "path": "cli-summarize.md",
+      "title": "reposummary summarize",
+      "type": "doc"
+    },
+    {
+      "path": "gen-index.md",
+      "title": "API Reference",
+      "type": "doc"
+    },
+    {
+      "path": "guide.md",
+      "title": "Usage guide",
+      "type": "doc"
+    }
+  ],
+  "posts": [],
+  "last_gen": "2026-07-08T16:40:43.706086+00:00"
+}
