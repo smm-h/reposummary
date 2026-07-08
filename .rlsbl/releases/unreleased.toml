@@ -1,9 +1,9 @@
 # Version bump type: patch, minor, major, hotfix, or prerelease
-bump = ""
+bump = "minor"
 # Short description of this release (required)
-description = ""
+description = "Initial release of reposummary: a git activity journal generator."
 # Optional context explaining why these changes were made
-context = ""
+context = "reposummary turns a repo's git history into a readable Markdown journal for any time window. The deterministic core needs no credentials; an optional LLM layer (claude CLI or Anthropic API) adds narrative prose. Distributed three ways from one repo: a Go binary (go install / GitHub releases), plus unscoped npm and PyPI packages that download the binary."
 # Pre-release identifier: alpha, beta, rc, or stable
 # preid = ""
 # Set to true to generate a blog post for this release
