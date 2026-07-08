@@ -2,6 +2,14 @@
 
 # Changelog
 
+## 0.1.1
+
+Fix the npm and PyPI publish pipeline so all three distribution channels work.
+
+### Fixes
+
+- **Working npm and PyPI packages.** The 0.1.0 npm/PyPI publish was blocked by a CI failure; `npm i -g reposummary` and `pip install reposummary` now install the prebuilt binary correctly.
+
 ## 0.1.0
 
 Initial release of reposummary: a git activity journal generator.
