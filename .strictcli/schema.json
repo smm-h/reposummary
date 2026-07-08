@@ -1,0 +1,115 @@
+{
+  "commands": {
+    "summarize": {
+      "args": [
+        {
+          "default": ".",
+          "help": "path to the git repository",
+          "name": "repo",
+          "required": false
+        }
+      ],
+      "flags": [
+        {
+          "help": "time window: today | yesterday | week | month | all | \u003cYYYY-MM-DD\u003e+\u003cN\u003e\u003cunit\u003e | \u003crefA\u003e..\u003crefB\u003e",
+          "name": "window",
+          "type": "str"
+        },
+        {
+          "choices": [
+            "none",
+            "claude-cli",
+            "anthropic-api"
+          ],
+          "help": "LLM synthesis backend",
+          "name": "synthesis",
+          "type": "str"
+        },
+        {
+          "default": "haiku",
+          "help": "model id for LLM synthesis",
+          "name": "model",
+          "type": "str"
+        },
+        {
+          "default": "HEAD",
+          "help": "git ref to treat as the tip",
+          "name": "branch",
+          "type": "str"
+        },
+        {
+          "default": "",
+          "help": "write journal to this file instead of stdout",
+          "name": "output",
+          "type": "str"
+        },
+        {
+          "default": "",
+          "help": "override the on-disk cache directory",
+          "name": "cache-dir",
+          "type": "str"
+        },
+        {
+          "default": true,
+          "help": "use the on-disk journal cache",
+          "name": "cache",
+          "negatable": true,
+          "type": "bool"
+        }
+      ],
+      "help": "Extract a git repository's activity over a time window and render a Markdown journal, optionally narrated by an LLM.",
+      "name": "summarize"
+    }
+  },
+  "defaults": {
+    "app": {
+      "commands": {},
+      "config": false,
+      "deprecated": {},
+      "env_prefix": null,
+      "global_flags": [],
+      "groups": {},
+      "tag_contracts": {}
+    },
+    "arg": {
+      "choices": null,
+      "default": null,
+      "required": true,
+      "type": "str",
+      "variadic": false
+    },
+    "command": {
+      "args": [],
+      "constraints": [],
+      "flags": [],
+      "hidden": false,
+      "interactive": false,
+      "passthrough": false,
+      "tags": []
+    },
+    "flag": {
+      "choices": null,
+      "default": null,
+      "env": null,
+      "env_separator": null,
+      "hidden": false,
+      "negatable": null,
+      "repeatable": false,
+      "short": null,
+      "unique": false
+    },
+    "group": {
+      "commands": {},
+      "deprecated": {},
+      "groups": {},
+      "hidden": false,
+      "tags": []
+    },
+    "schema_version": 1
+  },
+  "help": "Generate a Markdown journal of a git repository's activity over a time window.",
+  "name": "reposummary",
+  "project_id": "github.com/smm-h/reposummary",
+  "schema_version": 1,
+  "version": "dev"
+}

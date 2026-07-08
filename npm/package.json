@@ -1,0 +1,32 @@
+{
+  "name": "reposummary",
+  "version": "0.1.0",
+  "description": "Generate a Markdown journal of a git repository's activity over a time window",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smm-h/reposummary.git"
+  },
+  "homepage": "https://github.com/smm-h/reposummary",
+  "scripts": {
+    "postinstall": "node install.js",
+    "test": "node install.test.js"
+  },
+  "bin": {
+    "reposummary": "bin/reposummary"
+  },
+  "files": [
+    "install.js",
+    "bin/"
+  ],
+  "keywords": [
+    "git",
+    "repo",
+    "summary",
+    "markdown",
+    "journal",
+    "changelog",
+    "cli",
+    "rlsbl"
+  ]
+}

@@ -1,0 +1,24 @@
+/reposummary
+.rlsbl/lock
+.rlsbl-monorepo/lock
+docs/_build/
+coverage/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+
+node_modules/
+__pycache__/
+*.pyc
+build/
+target/
+*.egg-info/
+.rlsbl-notes-*.tmp
+.credentials.json
+.*-cache.json
+*.local-only
+
+# Session demo outputs — may reference private repositories; keep out of the public repo
+demo/
