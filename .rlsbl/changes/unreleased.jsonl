@@ -1,2 +1,0 @@
-{"id":"18c05e118ecbc9cdfe894b8be222430085446be13db991cd","commits":["5101f5723165ad0ae097920d7fc163a9b2261d91"],"user_facing":true,"description":"**Documentation.** Added a usage guide (window forms, the three synthesis backends, and the caching model) and a cleaner generated README; `reposummary summarize --help` now has fully descriptive flag and argument text.","type":"feature"}
-{"id":"18c05ec8751458ea17ceec88cdb341a8b1c61161e37dbeb8","commits":["8f5ebd1604b77c95dc945c517c34323d9a74e2c2"],"user_facing":false}
