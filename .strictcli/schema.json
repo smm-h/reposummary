@@ -4,7 +4,7 @@
       "args": [
         {
           "default": ".",
-          "help": "path to the git repository",
+          "help": "path to the git repository to summarize (a normal checkout or a bare + worktree layout)",
           "name": "repo",
           "required": false
         }
@@ -21,37 +21,37 @@
             "claude-cli",
             "anthropic-api"
           ],
-          "help": "LLM synthesis backend",
+          "help": "LLM synthesis backend for the prose summary: none, claude-cli, or anthropic-api (no silent fallback)",
           "name": "synthesis",
           "type": "str"
         },
         {
           "default": "haiku",
-          "help": "model id for LLM synthesis",
+          "help": "model id for LLM synthesis (e.g. haiku); used only when --synthesis is claude-cli or anthropic-api",
           "name": "model",
           "type": "str"
         },
         {
           "default": "HEAD",
-          "help": "git ref to treat as the tip",
+          "help": "git ref to treat as the tip of history when resolving the window (defaults to HEAD)",
           "name": "branch",
           "type": "str"
         },
         {
           "default": "",
-          "help": "write journal to this file instead of stdout",
+          "help": "write the generated Markdown journal to this file instead of printing to standard output",
           "name": "output",
           "type": "str"
         },
         {
           "default": "",
-          "help": "override the on-disk cache directory",
+          "help": "override the directory used for the on-disk journal cache (defaults to the user cache dir)",
           "name": "cache-dir",
           "type": "str"
         },
         {
           "default": true,
-          "help": "use the on-disk journal cache",
+          "help": "use the on-disk journal cache; pass --no-cache to always recompute the journal from scratch",
           "name": "cache",
           "negatable": true,
           "type": "bool"

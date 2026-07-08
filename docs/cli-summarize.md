@@ -17,15 +17,15 @@ Extract a git repository's activity over a time window and render a Markdown jou
 | Name | Short | Type | Default | Env | Description |
 | --- | --- | --- | --- | --- | --- |
 | `--window` |  | str |  |  | time window: today \| yesterday \| week \| month \| all \| <YYYY-MM-DD>+<N><unit> \| <refA>..<refB> |
-| `--synthesis` |  | str |  |  | LLM synthesis backend |
-| `--model` |  | str | haiku |  | model id for LLM synthesis |
-| `--branch` |  | str | HEAD |  | git ref to treat as the tip |
-| `--output` |  | str |  |  | write journal to this file instead of stdout |
-| `--cache-dir` |  | str |  |  | override the on-disk cache directory |
-| `--cache` |  | bool | True |  | use the on-disk journal cache |
+| `--synthesis` |  | str |  |  | LLM synthesis backend for the prose summary: none, claude-cli, or anthropic-api (no silent fallback) |
+| `--model` |  | str | haiku |  | model id for LLM synthesis (e.g. haiku); used only when --synthesis is claude-cli or anthropic-api |
+| `--branch` |  | str | HEAD |  | git ref to treat as the tip of history when resolving the window (defaults to HEAD) |
+| `--output` |  | str |  |  | write the generated Markdown journal to this file instead of printing to standard output |
+| `--cache-dir` |  | str |  |  | override the directory used for the on-disk journal cache (defaults to the user cache dir) |
+| `--cache` |  | bool | True |  | use the on-disk journal cache; pass --no-cache to always recompute the journal from scratch |
 
 ## Arguments
 
 | Name | Required | Description |
 | --- | --- | --- |
-| `repo` | no | path to the git repository |
+| `repo` | no | path to the git repository to summarize (a normal checkout or a bare + worktree layout) |
