@@ -2,6 +2,14 @@
 
 # Changelog
 
+## 0.1.3
+
+Documentation: a usage guide, selfdoc-managed README/CLAUDE, and clearer summarize --help.
+
+### Features
+
+- **Documentation.** Added a usage guide (window forms, the three synthesis backends, and the caching model) and a cleaner generated README; `reposummary summarize --help` now has fully descriptive flag and argument text.
+
 ## 0.1.2
 
 Fix the CI/publish pipeline so npm and PyPI packages actually publish (ci-pypi working directory + goreleaser archive format).

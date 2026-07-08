@@ -1,6 +1,6 @@
 {
   "name": "reposummary",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generate a Markdown journal of a git repository's activity over a time window",
   "license": "MIT",
   "repository": {

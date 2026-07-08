@@ -1,18 +1,46 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generate a Markdown journal of a git repository's activity over any time window, with optional LLM narration.",
   "source": [
-    {"path": ".", "language": "go"},
-    {"path": "internal/window", "language": "go"},
-    {"path": "internal/gitdata", "language": "go"},
-    {"path": "internal/digest", "language": "go"},
-    {"path": "internal/render", "language": "go"},
-    {"path": "internal/synth", "language": "go"},
-    {"path": "internal/cache", "language": "go"}
+    {
+      "path": ".",
+      "language": "go"
+    },
+    {
+      "path": "internal/window",
+      "language": "go"
+    },
+    {
+      "path": "internal/gitdata",
+      "language": "go"
+    },
+    {
+      "path": "internal/digest",
+      "language": "go"
+    },
+    {
+      "path": "internal/render",
+      "language": "go"
+    },
+    {
+      "path": "internal/synth",
+      "language": "go"
+    },
+    {
+      "path": "internal/cache",
+      "language": "go"
+    }
   ],
   "docs": "docs/",
   "output": "docs/_build/",
   "base_url": "https://github.com/smm-h/reposummary",
-  "root_files": ["docs/_README.md", "docs/_CLAUDE.md"],
-  "gen": {"exclude": ["*"]}
+  "root_files": [
+    "docs/_README.md",
+    "docs/_CLAUDE.md"
+  ],
+  "gen": {
+    "exclude": [
+      "*"
+    ]
+  }
 }
