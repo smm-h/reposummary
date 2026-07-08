@@ -1,0 +1,2 @@
+{"id":"18c057de9af15b1767b80984d2664b2fb8d70aa9b62e5e59","commits":["cedb4d96cc9ce4b8b5838fb42f01e0892d56402d"],"user_facing":true,"description":"**Working npm and PyPI packages.** The 0.1.0 npm/PyPI publish was blocked by a CI failure; `npm i -g reposummary` and `pip install reposummary` now install the prebuilt binary correctly.","type":"fix"}
+{"id":"18c05802e66bacb8b0a1a635e84346d1acc9c707cab8568c","commits":["2512c8ab56cc08143f0ab71e52c928c67ce6b0b7"],"user_facing":false}
