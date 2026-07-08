@@ -16,6 +16,11 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # The PyPI wrapper lives in ./pypi/ (path-based target); run all steps there so
+    # uv finds pyproject.toml + uv.lock. (The publish.yml pypi job does the same.)
+    defaults:
+      run:
+        working-directory: ./pypi/
     strategy:
       matrix:
         # requires-python: >= 3.8
