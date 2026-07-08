@@ -1,0 +1,39 @@
+{
+  "targets": [
+    "go",
+    {
+      "name": "npm",
+      "path": "npm/"
+    },
+    {
+      "name": "pypi",
+      "path": "pypi/"
+    }
+  ],
+  "private": false,
+  "pipelines": {
+    "go": {
+      "type": "go",
+      "local": true,
+      "install_paths": [
+        "."
+      ]
+    },
+    "npm": {
+      "type": "npm",
+      "local": false
+    },
+    "pypi": {
+      "type": "pypi",
+      "local": false
+    }
+  },
+  "hooks": {
+    "pre_release": [
+      "go vet ./...",
+      "go build -o /dev/null .",
+      "go test ./... -race -count=1"
+    ]
+  },
+  "coverage_unit": "commit"
+}
