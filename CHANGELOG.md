@@ -2,6 +2,14 @@
 
 # Changelog
 
+## 0.1.2
+
+Fix the CI/publish pipeline so npm and PyPI packages actually publish (ci-pypi working directory + goreleaser archive format).
+
+### Hotfix
+
+- Fix the CI/publish pipeline so npm and PyPI packages actually publish (ci-pypi working directory + goreleaser archive format).
+
 ## 0.1.1
 
 Fix the npm and PyPI publish pipeline so all three distribution channels work.
