@@ -9,6 +9,7 @@ const version = pkg.version;
 const PLATFORM_MAP = {
   linux: "linux",
   darwin: "darwin",
+  win32: "windows",
 };
 
 const ARCH_MAP = {
@@ -35,9 +36,11 @@ function main() {
     process.exit(1);
   }
 
-  const url = `https://github.com/smm-h/reposummary/releases/download/v${version}/reposummary_${version}_${os}_${arch}.tar.gz`;
+  const isWindows = os === "windows";
+  const ext = isWindows ? "zip" : "tar.gz";
+  const url = `https://github.com/smm-h/reposummary/releases/download/v${version}/reposummary_${version}_${os}_${arch}.${ext}`;
 
-  const binName = "reposummary";
+  const binName = isWindows ? "reposummary.exe" : "reposummary";
   const destPath = path.join(__dirname, "bin", binName);
 
   console.log(`Downloading reposummary v${version} for ${os}/${arch}...`);
@@ -51,8 +54,11 @@ function main() {
       process.exit(1);
     }
 
-    extractTarGz(data, binName, destPath);
-    fs.chmodSync(destPath, 0o755);
+    extractArchive(data, ext, binName, destPath);
+    // Windows binaries are not marked executable via chmod.
+    if (!isWindows) {
+      fs.chmodSync(destPath, 0o755);
+    }
     console.log(`reposummary v${version} installed successfully.`);
   });
 }
@@ -84,15 +90,18 @@ function download(url, callback, redirects) {
   }).on("error", callback);
 }
 
-function extractTarGz(data, binName, destPath) {
-  const tmpArchive = path.join(__dirname, "_tmp_archive.tar.gz");
+function extractArchive(data, ext, binName, destPath) {
+  const tmpArchive = path.join(__dirname, `_tmp_archive.${ext}`);
   const tmpDir = path.join(__dirname, "_tmp_extract");
 
   try {
     fs.writeFileSync(tmpArchive, data);
     fs.mkdirSync(tmpDir, { recursive: true });
 
-    execSync(`tar xzf "${tmpArchive}" -C "${tmpDir}"`, { stdio: "pipe" });
+    // Windows 10 1803+ bundles bsdtar, which extracts both .tar.gz and .zip;
+    // "xf" auto-detects the format, "xzf" forces gzip for the tarball path.
+    const flags = ext === "zip" ? "xf" : "xzf";
+    execSync(`tar ${flags} "${tmpArchive}" -C "${tmpDir}"`, { stdio: "pipe" });
 
     const extracted = findFile(tmpDir, binName);
     if (!extracted) {

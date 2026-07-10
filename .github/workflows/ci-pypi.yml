@@ -31,3 +31,4 @@ jobs:
       - run: uv python install ${{ matrix.python-version }}
       - run: uv sync --locked
       - run: uv run python -c "import reposummary"
+      - run: uv run pytest

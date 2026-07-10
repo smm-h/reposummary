@@ -19,3 +19,6 @@ packages = ["reposummary"]
 
 [project.scripts]
 reposummary = "reposummary:main"
+
+[dependency-groups]
+dev = ["pytest"]
