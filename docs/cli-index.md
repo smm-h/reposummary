@@ -13,7 +13,7 @@ order: 91
 
 Generate a Markdown journal of a git repository's activity over a time window.
 
-Version: dev
+Version: 0.2.0
 
 ## Commands
 
