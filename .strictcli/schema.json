@@ -11,7 +11,7 @@
       ],
       "flags": [
         {
-          "help": "time window: today | yesterday | week | month | all | \u003cYYYY-MM-DD\u003e+\u003cN\u003e\u003cunit\u003e | \u003crefA\u003e..\u003crefB\u003e",
+          "help": "time window: today | yesterday | week | month | all | <YYYY-MM-DD>+<N><unit> | <refA>..<refB>",
           "name": "window",
           "type": "str"
         },
@@ -111,5 +111,5 @@
   "name": "reposummary",
   "project_id": "github.com/smm-h/reposummary",
   "schema_version": 1,
-  "version": "dev"
+  "version": "0.2.0"
 }

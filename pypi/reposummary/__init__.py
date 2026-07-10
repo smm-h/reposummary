@@ -8,7 +8,7 @@ import urllib.request
 import zipfile
 
 
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 _BIN_DIR = os.path.join(os.path.dirname(__file__), "_bin")
 
 

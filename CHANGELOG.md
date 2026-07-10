@@ -2,6 +2,19 @@
 
 # Changelog
 
+## 0.2.0
+
+Cache pruning, Windows support for npm/PyPI installs, and journal polish fixes.
+
+### Features
+
+- **Cache pruning.** The on-disk journal cache now maintains itself: each write prunes entries not read in the last 90 days, and every cache hit refreshes an entry's timestamp so frequently-used journals stay warm.
+- **Windows support.** The npm and PyPI wrappers now install the prebuilt `windows/amd64` and `windows/arm64` binaries (downloading the `.zip` artifact and the `.exe`). Not yet CI-verified on a Windows runner.
+
+### Fixes
+
+- **Polish fixes.** Date-range window headings now use the same `→` glyph as the subtitle; distinct empty windows no longer share a cache entry (which could serve a cached journal under the wrong heading); and `--model` values are passed to the backend verbatim (both short aliases like `haiku` and full model ids work).
+
 ## 0.1.3
 
 Documentation: a usage guide, selfdoc-managed README/CLAUDE, and clearer summarize --help.

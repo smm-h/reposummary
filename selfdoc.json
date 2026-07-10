@@ -1,5 +1,5 @@
 {
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Generate a Markdown journal of a git repository's activity over any time window, with optional LLM narration.",
   "source": [
     {
