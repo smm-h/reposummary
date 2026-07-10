@@ -37,9 +37,11 @@ a hard error. The caller picks "none", "claude-cli", or "anthropic-api"; the
 choice is honored or it errors.
 
 Package cache is a deterministic on-disk journal cache. The journal for a
-fixed (firstSHA, lastSHA, synthesis, model, version) tuple is deterministic,
-so identical windows reuse cached output: cost is O(new commits), not
-O(window size). Storage is plain files; no database.
+fixed (firstSHA, lastSHA, synthesis, model, version, windowLabel) tuple is
+deterministic, so identical windows reuse cached output: cost is O(new
+commits), not O(window size). Storage is plain files; no database. Entries
+age out: a successful write prunes entries not read in the last 90 days,
+while a cache hit refreshes an entry's mtime so hot entries stay warm.
 
 ## Design rules (non-negotiable)
 

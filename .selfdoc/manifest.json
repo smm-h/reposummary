@@ -2,7 +2,7 @@
   "schema_version": 1,
   "name": "reposummary",
   "slug": "reposummary",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generate a Markdown journal of a git repository's activity over any time window, with optional LLM narration.",
   "language": "go",
   "base_url": "https://github.com/smm-h/reposummary",
@@ -29,5 +29,5 @@
     }
   ],
   "posts": [],
-  "last_gen": "2026-07-08T17:07:24.783702+00:00"
+  "last_gen": "2026-07-10T19:06:16.906420+00:00"
 }

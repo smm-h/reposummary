@@ -57,8 +57,8 @@ An unrecognized window is a hard error, never a silent fallthrough. See the usag
 - `claude-cli` — shells out to `claude -p --model <model>` (no API key needed).
 - `anthropic-api` — calls the Anthropic Messages API; requires `ANTHROPIC_API_KEY` in the environment (no implicit default).
 
-`--model` selects the model id (default `haiku`).
+`--model` selects the model id (default `haiku`). Short aliases (e.g. `haiku`) and full model ids (e.g. `claude-haiku-4-5-20251001`) both work — the model string is passed through to the backend verbatim.
 
 ## Caching
 
-A journal for a fixed `(firstSHA, lastSHA, synthesis, model, version)` tuple is deterministic, so identical windows reuse cached output on disk. The cache key is a sha256 of those inputs; entries are plain Markdown files under `$XDG_CACHE_HOME/reposummary` (or `~/.cache/reposummary`). Repeated summaries therefore cost O(new commits), not O(window size). Disable with `--no-cache`, or point elsewhere with `--cache-dir`.
+A journal for a fixed `(firstSHA, lastSHA, synthesis, model, version, windowLabel)` tuple is deterministic, so identical windows reuse cached output on disk. The cache key is a sha256 of those inputs; the window label is included so that distinct empty windows (both SHAs empty) never share an entry. Entries are plain Markdown files under `$XDG_CACHE_HOME/reposummary` (or `~/.cache/reposummary`). Repeated summaries therefore cost O(new commits), not O(window size). Entries age out on their own: each write opportunistically prunes entries not read in the last 90 days, and every cache hit refreshes an entry's timestamp so frequently-used journals stay warm. Disable with `--no-cache`, or point elsewhere with `--cache-dir`.
