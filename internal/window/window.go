@@ -99,7 +99,7 @@ func ParseWindow(spec string) (Spec, error) {
 			Mode:  "daterange",
 			Since: startDate.Format("2006-01-02"),
 			Until: until.Format("2006-01-02"),
-			Label: fmt.Sprintf("%s -> %s", startDate.Format("2006-01-02"), until.Format("2006-01-02")),
+			Label: fmt.Sprintf("%s → %s", startDate.Format("2006-01-02"), until.Format("2006-01-02")),
 			Raw:   spec,
 		}, nil
 	}

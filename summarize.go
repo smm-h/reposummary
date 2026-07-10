@@ -94,7 +94,7 @@ func handleSummarize(kwargs map[string]interface{}) int {
 			errorf("opening cache: %s", err)
 			return exitError
 		}
-		key = cache.MakeKey(dig.FirstSHA, dig.LastSHA, synthesis, model, version)
+		key = cache.MakeKey(dig.FirstSHA, dig.LastSHA, synthesis, model, version, win.Label)
 		if md, ok := c.Get(key); ok {
 			return writeOutput(md, output)
 		}

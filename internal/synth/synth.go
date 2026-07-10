@@ -31,12 +31,6 @@ Rules:
 
 Here is the digest:`
 
-// modelAliases maps short model names to full Anthropic model ids. Unknown
-// names are passed through unchanged.
-var modelAliases = map[string]string{
-	"haiku": "claude-haiku-4-5-20251001",
-}
-
 // Synthesize produces narrative prose for a digest using the chosen backend.
 func Synthesize(d digest.Digest, mode, model string) (string, error) {
 	switch mode {
@@ -104,14 +98,9 @@ func synthesizeAnthropicAPI(d digest.Digest, model string) (string, error) {
 		return "", fmt.Errorf("anthropic-api synthesis requires ANTHROPIC_API_KEY to be set")
 	}
 
-	resolvedModel := model
-	if full, ok := modelAliases[model]; ok {
-		resolvedModel = full
-	}
-
 	prompt := buildPrompt(d)
 	reqBody := apiRequest{
-		Model:     resolvedModel,
+		Model:     model,
 		MaxTokens: 900,
 		Messages:  []apiMessage{{Role: "user", Content: prompt}},
 	}

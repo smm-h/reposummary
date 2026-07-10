@@ -1,7 +1,7 @@
 // Package cache is a deterministic on-disk journal cache. The journal for a
-// fixed (firstSHA, lastSHA, synthesis, model, version) tuple is deterministic,
-// so identical windows reuse cached output: cost is O(new commits), not
-// O(window size). Storage is plain files; no database.
+// fixed (firstSHA, lastSHA, synthesis, model, version, windowLabel) tuple is
+// deterministic, so identical windows reuse cached output: cost is O(new
+// commits), not O(window size). Storage is plain files; no database.
 package cache
 
 import (
@@ -44,8 +44,13 @@ func DefaultDir() string {
 
 // MakeKey returns the sha256 hex of the join of the cache inputs. The journal is
 // fully determined by this tuple.
-func MakeKey(firstSHA, lastSHA, synthesis, model, version string) string {
-	joined := strings.Join([]string{firstSHA, lastSHA, synthesis, model, version}, "|")
+//
+// windowLabel is part of the key because a zero-commit window has empty
+// firstSHA/lastSHA: without the label, every distinct empty window would
+// collapse to the same key and a cached "no activity" journal could be served
+// under the wrong window heading.
+func MakeKey(firstSHA, lastSHA, synthesis, model, version, windowLabel string) string {
+	joined := strings.Join([]string{firstSHA, lastSHA, synthesis, model, version, windowLabel}, "|")
 	sum := sha256.Sum256([]byte(joined))
 	return hex.EncodeToString(sum[:])
 }

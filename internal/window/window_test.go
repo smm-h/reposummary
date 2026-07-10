@@ -65,8 +65,8 @@ func TestParseWindowDateAdd(t *testing.T) {
 	if got.Until != "2026-07-11" {
 		t.Errorf("Until = %q, want 2026-07-11", got.Until)
 	}
-	if got.Label != "2026-06-11 -> 2026-07-11" {
-		t.Errorf("Label = %q, want '2026-06-11 -> 2026-07-11'", got.Label)
+	if got.Label != "2026-06-11 → 2026-07-11" {
+		t.Errorf("Label = %q, want '2026-06-11 → 2026-07-11'", got.Label)
 	}
 }
 

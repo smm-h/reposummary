@@ -40,26 +40,29 @@ backend to another.
 | `claude-cli` | shells out to the `claude` CLI (`claude -p --model <model>`); no API key needed. If `claude` is missing, not logged in, or fails, that is a hard error |
 | `anthropic-api` | calls the Anthropic Messages API; requires `ANTHROPIC_API_KEY` in the environment (no implicit default). A missing key is a hard error |
 
-`--model` selects the model id (default `haiku`, which maps to a current Anthropic Haiku
-model; full model ids are passed through unchanged). The model is only consulted when the
+`--model` selects the model id (default `haiku`). Both short aliases (e.g. `haiku`) and full
+model ids (e.g. `claude-haiku-4-5-20251001`) are passed through to the backend verbatim — the
+Anthropic API and the `claude` CLI both accept alias ids. The model is only consulted when the
 backend is `claude-cli` or `anthropic-api`.
 
 ## Caching and incremental efficiency
 
-A journal for a fixed `(firstSHA, lastSHA, synthesis, model, version)` tuple is
+A journal for a fixed `(firstSHA, lastSHA, synthesis, model, version, windowLabel)` tuple is
 deterministic, so identical windows reuse cached output. The cache key is a sha256 over
-those five inputs:
+those six inputs:
 
 - `firstSHA` and `lastSHA` — the commit range actually covered by the window
 - `synthesis` — the selected backend
 - `model` — the model id
 - `version` — the reposummary version (so a new release never serves stale prose)
+- `windowLabel` — the resolved window heading, so that two windows with **no**
+  commits (both SHAs empty) never collapse to the same entry and serve a cached
+  journal under the wrong heading
 
 Entries are plain Markdown files under the cache directory
-(`$XDG_CACHE_HOME/reposummary`, or `~/.cache/reposummary`). Because the key is the resolved
-commit range rather than the window text, two different window expressions that resolve to
-the same range share a cache entry, and repeated summaries cost O(new commits), not
-O(window size).
+(`$XDG_CACHE_HOME/reposummary`, or `~/.cache/reposummary`). Two window expressions that
+resolve to the same commit range and produce the same label share a cache entry, so repeated
+summaries cost O(new commits), not O(window size).
 
 - `--no-cache` disables the cache entirely (always recompute, never read or write).
 - `--cache-dir <path>` overrides the cache directory.
