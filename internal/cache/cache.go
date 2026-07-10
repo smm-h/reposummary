@@ -1,7 +1,9 @@
 // Package cache is a deterministic on-disk journal cache. The journal for a
 // fixed (firstSHA, lastSHA, synthesis, model, version, windowLabel) tuple is
 // deterministic, so identical windows reuse cached output: cost is O(new
-// commits), not O(window size). Storage is plain files; no database.
+// commits), not O(window size). Storage is plain files; no database. Entries
+// age out: a successful write prunes entries not read in the last 90 days,
+// while a cache hit refreshes an entry's mtime so hot entries stay warm.
 package cache
 
 import (
@@ -10,7 +12,14 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
+
+// maxAge is how long a cache entry survives without being read. On each
+// successful Set, entries whose mtime is older than this are opportunistically
+// pruned; a cache-hit Get refreshes an entry's mtime so hot entries never age
+// out.
+const maxAge = 90 * 24 * time.Hour
 
 // Cache is a filesystem-backed journal cache rooted at a directory.
 type Cache struct {
@@ -55,18 +64,51 @@ func MakeKey(firstSHA, lastSHA, synthesis, model, version, windowLabel string) s
 	return hex.EncodeToString(sum[:])
 }
 
-// Get reads a cached journal by key. The second return is false on a miss.
+// Get reads a cached journal by key. The second return is false on a miss. On a
+// hit the entry's mtime is refreshed so that frequently-read entries survive
+// age-based pruning. A failed touch is non-fatal (the read still succeeds).
 func (c *Cache) Get(key string) (string, bool) {
-	data, err := os.ReadFile(c.path(key))
+	p := c.path(key)
+	data, err := os.ReadFile(p)
 	if err != nil {
 		return "", false
 	}
+	now := time.Now()
+	_ = os.Chtimes(p, now, now)
 	return string(data), true
 }
 
-// Set writes a journal to the cache under key.
+// Set writes a journal to the cache under key, then opportunistically prunes
+// entries older than maxAge. Pruning is best-effort housekeeping: its failures
+// are swallowed and never turn a successful write into an error.
 func (c *Cache) Set(key, md string) error {
-	return os.WriteFile(c.path(key), []byte(md), 0644)
+	if err := os.WriteFile(c.path(key), []byte(md), 0644); err != nil {
+		return err
+	}
+	c.pruneOld()
+	return nil
+}
+
+// pruneOld deletes cache entries whose mtime is older than maxAge. Every error
+// is ignored: this pass runs after a successful Set and must never break it.
+func (c *Cache) pruneOld() {
+	entries, err := os.ReadDir(c.dir)
+	if err != nil {
+		return
+	}
+	cutoff := time.Now().Add(-maxAge)
+	for _, e := range entries {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), ".md") {
+			continue
+		}
+		info, err := e.Info()
+		if err != nil {
+			continue
+		}
+		if info.ModTime().Before(cutoff) {
+			_ = os.Remove(filepath.Join(c.dir, e.Name()))
+		}
+	}
 }
 
 func (c *Cache) path(key string) string {

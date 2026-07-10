@@ -64,6 +64,11 @@ Entries are plain Markdown files under the cache directory
 resolve to the same commit range and produce the same label share a cache entry, so repeated
 summaries cost O(new commits), not O(window size).
 
+The cache is self-maintaining: each successful write opportunistically prunes entries whose
+files have not been read in the last 90 days, and every cache hit refreshes the entry's
+timestamp so frequently-used journals never age out. Pruning is best-effort — a failed prune
+never fails the write.
+
 - `--no-cache` disables the cache entirely (always recompute, never read or write).
 - `--cache-dir <path>` overrides the cache directory.
 
